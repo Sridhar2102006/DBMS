@@ -1,12 +1,15 @@
 <?php
 // config/db.php
-$host = 'localhost';
-$user = 'root';
-$password = '';
-$dbname = 'pollution_db';
+
+// Use environment variables for Vercel, fallback to localhost for XAMPP
+$host = getenv('DB_HOST') ?: 'localhost';
+$user = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASS') ?: '';
+$dbname = getenv('DB_NAME') ?: 'pollution_db';
+$port = getenv('DB_PORT') ?: 3306;
 
 // Create connection
-$conn = new mysqli($host, $user, $password, $dbname);
+$conn = new mysqli($host, $user, $password, $dbname, $port);
 
 // Check connection
 if ($conn->connect_error) {
